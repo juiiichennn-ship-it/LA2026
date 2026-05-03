@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🌵 美西之旅 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root {
+  --navy: #0f2744;
+  --blue-dark: #1a3f6f;
+  --blue-mid: #2563a8;
+  --blue-light: #4a8fd4;
+  --blue-pale: #c5ddf5;
+  --blue-ultra: #e8f4fd;
+  --gold: #f5a623;
+  --gold-light: #ffd580;
+  --red: #c0392b;
+  --green: #27ae60;
+  --yellow: #f39c12;
+  --yellow-light: #fde8b0;
+  --gray-light: #eaf5ff;
+  --text-dark: #0f2744;
+  --text-mid: #3a5a80;
+  --text-light: #7a9bc0;
+  --white: #ffffff;
+  --card-shadow: 0 4px 20px rgba(15,39,68,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--gray-light);
+  color: var(--text-dark);
+  min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(170deg, #dff2ff 0%, #c5e5f8 50%, #aed5f0 100%);
+  padding: 36px 20px 22px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; left: -20px;
+  width: 150px; height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100,180,240,0.2) 0%, transparent 70%);
+}
+.hero-emoji { font-size: 32px; margin-bottom: 6px; display: block; }
+.hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 30px; font-weight: 800;
+  color: #1a4a6e;
+  letter-spacing: -0.5px;
+}
+.hero-sub {
+  font-size: 10px; font-weight: 600;
+  color: #5a90b5;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  margin-top: 3px;
+}
+.hero-badges {
+  display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px;
+}
+.badge {
+  background: rgba(255,255,255,0.8);
+  border: 1.5px solid rgba(90,160,210,0.3);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-size: 12px; color: #1a4a6e;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  box-shadow: 0 2px 8px rgba(30,100,160,0.08);
+}
+.badge-date {
+  background: rgba(37,99,168,0.1);
+  border-color: rgba(37,99,168,0.25);
+  color: #1a3f6f;
+}
+.badge-gold { background: rgba(245,166,35,0.15); border-color: rgba(245,166,35,0.4); color: #8a5500; }
+
+/* TAB NAV */
+.tab-nav {
+  background: var(--white);
+  display: flex;
+  overflow-x: auto; scrollbar-width: none;
+  border-bottom: 2px solid var(--blue-ultra);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(15,39,68,0.08);
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex: none;
+  padding: 13px 16px 11px;
+  border: none; background: transparent; cursor: pointer;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px; font-weight: 500;
+  color: var(--text-light); white-space: nowrap;
+  position: relative; transition: all 0.2s;
+  display: flex; align-items: center; gap: 4px;
+}
+.tab-btn.active { color: var(--blue-mid); font-weight: 700; }
+.tab-btn.active::after {
+  content: '';
+  position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 3px; background: var(--blue-mid);
+  border-radius: 3px 3px 0 0;
+}
+
+/* TAB PANELS */
+.tab-panel { display: none; padding: 14px; }
+.tab-panel.active { display: block; }
+
+/* DAY SELECTOR */
+.day-scroll {
+  display: flex; gap: 7px;
+  overflow-x: auto; scrollbar-width: none;
+  padding: 2px 0 10px;
+}
+.day-scroll::-webkit-scrollbar { display: none; }
+.day-chip {
+  flex: none;
+  background: var(--white);
+  border: 1.5px solid var(--blue-pale);
+  border-radius: 12px; padding: 7px 13px;
+  cursor: pointer; text-align: center;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(15,39,68,0.07);
+}
+.day-chip.active {
+  background: var(--blue-mid); border-color: var(--blue-mid);
+  box-shadow: 0 4px 14px rgba(37,99,168,0.35);
+}
+.day-chip-date { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-dark); }
+.day-chip.active .day-chip-date { color: var(--white); }
+.day-chip-dow { font-size: 10px; color: var(--text-light); margin-top: 1px; }
+.day-chip.active .day-chip-dow { color: rgba(255,255,255,0.75); }
+
+/* WEATHER BANNER */
+.weather-banner {
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 12px;
+  position: relative; overflow: hidden;
+}
+.weather-hot { background: linear-gradient(135deg, #ff6b35, #f7931e); }
+.weather-warm { background: linear-gradient(135deg, #f7931e, #ffd700); }
+.weather-mild { background: linear-gradient(135deg, #56a0d3, #4a90d9); }
+.weather-banner-emoji { font-size: 36px; flex-shrink: 0; }
+.weather-banner-info { flex: 1; }
+.weather-banner-temp {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px; font-weight: 800; color: var(--white); line-height: 1;
+}
+.weather-banner-desc { font-size: 12px; color: rgba(255,255,255,0.85); margin-top: 2px; }
+.weather-banner-location { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 1px; }
+.weather-stats {
+  display: flex; gap: 10px;
+}
+.weather-stat { text-align: center; }
+.weather-stat-val { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); }
+.weather-stat-label { font-size: 9px; color: rgba(255,255,255,0.7); }
+.weather-tip {
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px; padding: 7px 10px;
+  font-size: 11px; color: var(--white);
+  margin-top: 8px;
+  backdrop-filter: blur(4px);
+}
+
+/* DAILY COST SUMMARY */
+.daily-cost-bar {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--card-shadow);
+}
+.daily-cost-label { font-size: 11px; color: var(--text-light); flex: 1; }
+.daily-cost-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--blue-mid);
+}
+.daily-cost-sub { font-size: 10px; color: var(--text-light); text-align: right; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 18px; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 6px; top: 8px; bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--blue-pale), transparent);
+}
+.tl-item { position: relative; margin-bottom: 10px; }
+.tl-item::before {
+  content: '';
+  position: absolute; left: -13px; top: 10px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--blue-light);
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 2px var(--blue-pale);
+}
+.tl-card {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  border-left: 3px solid var(--blue-light);
+  box-shadow: 0 2px 8px rgba(15,39,68,0.07);
+}
+.tl-card-top { display: flex; align-items: flex-start; gap: 8px; }
+.tl-card-main { flex: 1; }
+.tl-time {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px; font-weight: 600;
+  color: var(--blue-mid); margin-bottom: 2px;
+}
+.tl-name { font-size: 14px; font-weight: 500; color: var(--text-dark); line-height: 1.35; }
+.tl-note { font-size: 11px; color: var(--text-mid); margin-top: 2px; }
+.tl-bottom {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 7px; flex-wrap: wrap;
+}
+.tl-tag {
+  font-size: 10px; font-weight: 600;
+  padding: 2px 7px; border-radius: 6px;
+}
+.tag-景點 { background: #fde8f0; color: #c0456f; }
+.tag-吃飯 { background: #fef3e2; color: #d97706; }
+.tag-交通 { background: #e0f0fe; color: #1d6fa4; }
+.tag-飯店 { background: #ede9fe; color: #7c3aed; }
+.tag-逛街 { background: #e8fdf0; color: #059669; }
+
+/* Transport cost chip */
+.cost-chip {
+  display: flex; align-items: center; gap: 3px;
+  background: var(--yellow-light);
+  border-radius: 6px; padding: 2px 7px;
+  font-size: 10px; font-weight: 600; color: #92400e;
+}
+.cost-chip.parking { background: #e8fdf0; color: #065f46; }
+.cost-chip.drive { background: #ede9fe; color: #5b21b6; }
+
+/* Travel leg (how to get there) */
+.travel-leg {
+  font-size: 10px;
+  color: var(--text-light);
+  background: #f0f5fb;
+  border-radius: 5px;
+  padding: 3px 7px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+/* Map button */
+.map-btn {
+  display: flex; align-items: center; gap: 3px;
+  background: #e8f4fd; border-radius: 6px;
+  padding: 2px 7px;
+  font-size: 10px; font-weight: 600; color: var(--blue-mid);
+  text-decoration: none; cursor: pointer;
+  border: none; font-family: inherit;
+  transition: all 0.15s;
+  margin-left: auto;
+}
+.map-btn:active { background: var(--blue-pale); }
+
+/* Section heading */
+.section-hd {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: var(--text-light); letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 4px 0 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.section-hd::after {
+  content: ''; flex: 1; height: 1px; background: var(--blue-pale);
+}
+
+/* EXPENSE */
+.expense-summary {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue-mid) 100%);
+  border-radius: var(--radius); padding: 18px 20px;
+  margin-bottom: 12px; color: var(--white);
+  position: relative; overflow: hidden;
+}
+.expense-summary::after {
+  content: '💰';
+  position: absolute; right: 16px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 44px; opacity: 0.12;
+}
+.expense-label { font-size: 10px; color: var(--blue-pale); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px; }
+.expense-total { font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 800; color: var(--white); line-height: 1; }
+.expense-sub { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 3px; }
+.expense-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 12px; }
+.expense-mini {
+  background: var(--white); border-radius: var(--radius-sm);
+  padding: 11px 13px; box-shadow: var(--card-shadow);
+}
+.expense-mini-label { font-size: 10px; color: var(--text-light); margin-bottom: 3px; }
+.expense-mini-val { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-dark); }
+.expense-mini-desc { font-size: 10px; color: var(--text-light); margin-top: 1px; }
+
+.filter-bar { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 2px 0 10px; }
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-btn {
+  flex: none; padding: 5px 12px; border-radius: 20px;
+  border: 1.5px solid var(--blue-pale); background: var(--white);
+  font-size: 12px; font-weight: 500; color: var(--text-mid);
+  cursor: pointer; transition: all 0.2s; font-family: inherit;
+}
+.filter-btn.active { background: var(--blue-mid); border-color: var(--blue-mid); color: var(--white); }
+
+.card { background: var(--white); border-radius: var(--radius); box-shadow: var(--card-shadow); overflow: hidden; margin-bottom: 12px; }
+.card-header { padding: 12px 16px 10px; border-bottom: 1px solid var(--blue-ultra); }
+.card-title { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-dark); }
+.card-body { padding: 0 16px 4px; }
+
+.expense-row {
+  display: flex; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--blue-ultra); gap: 9px;
+}
+.expense-row:last-child { border-bottom: none; }
+.exp-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.exp-name { flex: 1; font-size: 13px; color: var(--text-dark); line-height: 1.3; }
+.exp-sub { font-size: 10px; color: var(--text-light); }
+.exp-amount { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-dark); text-align: right; }
+.exp-per { font-size: 10px; color: var(--text-light); text-align: right; }
+.status-badge { font-size: 10px; font-weight: 600; padding: 3px 7px; border-radius: 6px; white-space: nowrap; }
+.status-paid { background: #dcfce7; color: #16a34a; }
+.status-reserved { background: #dbeafe; color: #1d4ed8; }
+.status-onsite { background: var(--yellow-light); color: #92400e; }
+.status-unpurchased { background: #fee2e2; color: #dc2626; }
+
+/* NOTES */
+.alert-card {
+  border-radius: var(--radius-sm); padding: 11px 13px;
+  margin-bottom: 9px; display: flex; gap: 9px; align-items: flex-start;
+}
+.alert-warning { background: #fffbeb; border-left: 3px solid var(--gold); }
+.alert-danger { background: #fef2f2; border-left: 3px solid var(--red); }
+.alert-info { background: var(--blue-ultra); border-left: 3px solid var(--blue-light); }
+.alert-icon { font-size: 15px; flex-shrink: 0; }
+.alert-text { font-size: 12px; color: var(--text-dark); line-height: 1.5; }
+.alert-title { font-weight: 700; margin-bottom: 2px; font-size: 13px; }
+
+.bottom-space { height: 32px; }
+
+/* Google Sheets integration */
+.sheets-setup-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 24px 20px 20px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.sheets-url-input {
+  width: 100%;
+  border: 1.5px solid var(--blue-pale);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-dark);
+  background: var(--blue-ultra);
+  margin-bottom: 10px;
+  outline: none;
+  transition: border 0.2s;
+}
+.sheets-url-input:focus { border-color: var(--blue-mid); }
+.sheets-connect-btn {
+  width: 100%;
+  background: var(--blue-mid);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 11px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sheets-connect-btn:active { background: var(--blue-dark); }
+.sheets-hint {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 12px;
+  line-height: 1.7;
+  text-align: left;
+  background: var(--blue-ultra);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.sheets-status {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--card-shadow);
+  border-left: 3px solid #22c55e;
+}
+.sheets-refresh-btn {
+  background: var(--blue-ultra);
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue-mid);
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.sheets-reset-btn {
+  background: #fee2e2;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: 12px;
+  color: #dc2626;
+  cursor: pointer;
+  font-family: inherit;
+}
+.sheets-error {
+  background: #fef2f2;
+  border-left: 3px solid #dc2626;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #dc2626;
+  margin-bottom: 10px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeUp 0.28s ease forwards; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-emoji">🌵</span>
+  <div class="hero-title">美西之旅</div>
+  <div class="hero-sub">Las Vegas · Grand Canyon · LA · Anaheim</div>
+  <div class="hero-badges">
+    <span class="badge">✈️ 去程 BR6 → AA2039</span>
+    <span class="badge">✈️ 回程 BR5</span>
+    <span class="badge badge-date">📅 6/27（六）出發</span>
+    <span class="badge badge-date">📅 7/6（一）回程</span>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('itinerary', this)">📅 行程總覽</button>
+  <button class="tab-btn" onclick="switchTab('expense', this)">💰 花費紀錄</button>
+  <button class="tab-btn" onclick="switchTab('notes', this)">📝 注意事項</button>
+</nav>
+
+<!-- ═══ 行程總覽 ═══ -->
+<div id="tab-itinerary" class="tab-panel active">
+  <div class="day-scroll" id="dayScroll">
+    <div class="day-chip active" onclick="selectDay(0,this)"><div class="day-chip-date">6/27</div><div class="day-chip-dow">六</div></div>
+    <div class="day-chip" onclick="selectDay(1,this)"><div class="day-chip-date">6/28</div><div class="day-chip-dow">日</div></div>
+    <div class="day-chip" onclick="selectDay(2,this)"><div class="day-chip-date">6/29</div><div class="day-chip-dow">一</div></div>
+    <div class="day-chip" onclick="selectDay(3,this)"><div class="day-chip-date">6/30</div><div class="day-chip-dow">二</div></div>
+    <div class="day-chip" onclick="selectDay(4,this)"><div class="day-chip-date">7/1</div><div class="day-chip-dow">三</div></div>
+    <div class="day-chip" onclick="selectDay(5,this)"><div class="day-chip-date">7/2</div><div class="day-chip-dow">四</div></div>
+    <div class="day-chip" onclick="selectDay(6,this)"><div class="day-chip-date">7/3</div><div class="day-chip-dow">五</div></div>
+    <div class="day-chip" onclick="selectDay(7,this)"><div class="day-chip-date">7/4</div><div class="day-chip-dow">六</div></div>
+    <div class="day-chip" onclick="selectDay(8,this)"><div class="day-chip-date">7/5</div><div class="day-chip-dow">日</div></div>
+    <div class="day-chip" onclick="selectDay(9,this)"><div class="day-chip-date">7/6</div><div class="day-chip-dow">一</div></div>
+  </div>
+  <div id="dayContent"></div>
+  <div class="bottom-space"></div>
+</div>
+
+<!-- ═══ 花費紀錄 ═══ -->
+<div id="tab-expense" class="tab-panel">
+
+  <!-- Sheets 設定區已移除：URL 已固定寫入 -->
+
+  <!-- 試算表同步狀態列（常駐顯示） -->
+  <div id="sheetsStatus" class="sheets-status">
+    <span id="sheetsStatusDot" style="width:8px;height:8px;border-radius:50%;background:#f59e0b;flex-shrink:0"></span>
+    <div style="flex:1">
+      <div id="sheetsStatusText" style="font-size:12px;font-weight:600;color:#1a4a6e">連接 Google Sheets 中…</div>
+      <div id="sheetsStatusSub" style="font-size:10px;color:var(--text-light);margin-top:1px"></div>
+    </div>
+    <button class="sheets-refresh-btn" onclick="loadFromSheets(true)">↻ 更新</button>
+  </div>
+
+  <!-- 統計卡 -->
+  <div class="expense-summary">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between">
+      <div>
+        <div class="expense-label">固定費用合計（4人）</div>
+        <div class="expense-total" id="summaryTotal">NT$389,054</div>
+        <div class="expense-sub" id="summaryPer">每人平均 NT$97,264</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:10px;color:var(--blue-pale);margin-bottom:4px">待付款項</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:#ffd580" id="summaryPending">–</div>
+      </div>
+    </div>
+  </div>
+  <div class="expense-grid">
+    <div class="expense-mini">
+      <div class="expense-mini-label">✅ 已付款</div>
+      <div class="expense-mini-val" id="statPaid" style="color:#16a34a">–</div>
+      <div class="expense-mini-desc" id="statPaidN"></div>
+    </div>
+    <div class="expense-mini">
+      <div class="expense-mini-label">❌ 未訂購</div>
+      <div class="expense-mini-val" id="statUnpurchased" style="color:#dc2626">–</div>
+      <div class="expense-mini-desc" id="statUnpurchasedN"></div>
+    </div>
+    <div class="expense-mini">
+      <div class="expense-mini-label">📋 已預定未付</div>
+      <div class="expense-mini-val" id="statReserved" style="color:#1d4ed8">–</div>
+      <div class="expense-mini-desc" id="statReservedN"></div>
+    </div>
+    <div class="expense-mini">
+      <div class="expense-mini-label">🏷️ 現場付款</div>
+      <div class="expense-mini-val" id="statOnsite" style="color:#92400e">–</div>
+      <div class="expense-mini-desc" id="statOnsiteN"></div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterExpense('all',this)">全部</button>
+    <button class="filter-btn" onclick="filterExpense('paid',this)">✅ 已付款</button>
+    <button class="filter-btn" onclick="filterExpense('reserved',this)">📋 已預定未付</button>
+    <button class="filter-btn" onclick="filterExpense('onsite',this)">🏷️ 現場付款</button>
+    <button class="filter-btn" onclick="filterExpense('unpurchased',this)">❌ 未訂購</button>
+  </div>
+  <div class="card">
+    <div class="card-header" style="display:flex;align-items:center;justify-content:space-between">
+      <div class="card-title">🗂️ 費用明細</div>
+      <div id="dataSourceBadge" style="font-size:10px;color:var(--text-light)">內建資料</div>
+    </div>
+    <div class="card-body"><div id="expenseTable"></div></div>
+  </div>
+
+  <div class="bottom-space"></div>
+</div>
+
+<!-- ═══ 注意事項 ═══ -->
+<div id="tab-notes" class="tab-panel">
+  <div class="section-hd">❌ 尚未訂購</div>
+  <div class="alert-card alert-danger"><div class="alert-icon">⚠️</div><div class="alert-text"><div class="alert-title">大峽谷行程（6/29）</div>NT$18,000 / 4人 · 需盡快訂購！在 Circus Circus 集合。</div></div>
+  <div class="alert-card alert-danger"><div class="alert-icon">⚠️</div><div class="alert-text"><div class="alert-title">7/3 環球影城門票</div>NT$16,700 / 4人 · 需盡快訂購！</div></div>
+
+  <div class="section-hd">📋 已預定未付款</div>
+  <div class="alert-card alert-warning"><div class="alert-icon">🏨</div><div class="alert-text"><div class="alert-title">Fontainebleau LV（6/27–6/30）</div>NT$35,000 / 4人 · 每人 NT$8,750</div></div>
+  <div class="alert-card alert-warning"><div class="alert-icon">🏨</div><div class="alert-text"><div class="alert-title">Element Anaheim（6/30–7/2）</div>NT$20,000 / 4人 · 每人 NT$5,000</div></div>
+  <div class="alert-card alert-warning"><div class="alert-icon">🏨</div><div class="alert-text"><div class="alert-title">Holiday Inn Glendale（7/2–7/6）</div>NT$43,000 / 4人 · 每人 NT$10,750</div></div>
+
+  <div class="section-hd">💡 實用提醒</div>
+  <div class="alert-card alert-info"><div class="alert-icon">☀️</div><div class="alert-text"><div class="alert-title">LV 六月天氣</div>氣溫可達 39°C，隨身帶大量水、防曬、帽子。室內賭場冷氣強，備一件薄外套。</div></div>
+  <div class="alert-card alert-info"><div class="alert-icon">🛬</div><div class="alert-text"><div class="alert-title">LAX 轉機注意</div>抵達 LAX 後需通過入境審查、提行李，再轉至 AA 國內線航廈（需搭接駁）。預留至少 90 分鐘。</div></div>
+  <div class="alert-card alert-info"><div class="alert-icon">🛒</div><div class="alert-text"><div class="alert-title">補給建議</div>6/30 租車後提前去超市買水備用。抵達 Element Anaheim 後可去附近超市補貨。</div></div>
+  <div class="alert-card alert-info"><div class="alert-icon">🍽️</div><div class="alert-text"><div class="alert-title">餐廳已訂位</div>Sadelle's（6/28）、Herbs and Rye（6/29 已訂位）、Quarters Korean BBQ（7/4 可訂位）</div></div>
+  <div class="bottom-space"></div>
+</div>
+
+<script>
+// ── LIVE WEATHER via Claude API ──────────────────────────────────
+const weatherCache = {};
+
+const cityEnNames = {
+  'LV':           'Las Vegas, NV',
+  'Grand Canyon': 'Grand Canyon Village, AZ',
+  'Anaheim':      'Anaheim, CA',
+  'LA':           'Los Angeles, CA'
+};
+
+async function fetchWeather(cityKey) {
+  if (weatherCache[cityKey]) return weatherCache[cityKey];
+
+  const cityEn = cityEnNames[cityKey];
+  const prompt = `你是旅遊天氣助手。請用 web_search 查詢「${cityEn} weather today」取得當前即時天氣，然後回傳一個 JSON 物件（不要有任何多餘文字或 markdown）：
+{
+  "high": 數字（攝氏最高溫，整數）,
+  "low": 數字（攝氏最低溫，整數）,
+  "rain": "降雨機率百分比字串，例如 '10%'",
+  "humidity": "濕度百分比字串，例如 '30%'",
+  "desc": "20字以內中文天氣描述",
+  "emoji": "1個最符合天氣的 emoji",
+  "tip": "30字以內中文旅遊穿搭/注意提示，以 emoji 開頭"
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
+    const clean = text.replace(/```json|```/g, '').trim();
+    const json = JSON.parse(clean);
+
+    // assign colour class
+    json.class = json.high >= 36 ? 'weather-hot' : json.high >= 28 ? 'weather-warm' : 'weather-mild';
+    weatherCache[cityKey] = json;
+    return json;
+  } catch(e) {
+    // fallback
+    const fallback = {
+      'LV':           { high:39, low:26, rain:'8%',  humidity:'10%', desc:'晴、乾燥', emoji:'☀️', tip:'⚠️ 酷熱！帶大量水、防曬。室內冷氣強備薄外套。', class:'weather-hot' },
+      'Grand Canyon': { high:34, low:18, rain:'15%', humidity:'20%', desc:'晴，午後雷陣雨',  emoji:'🌤️', tip:'☁️ 早出發避午後雷雨，帶帽子與水。', class:'weather-warm' },
+      'Anaheim':      { high:30, low:20, rain:'5%',  humidity:'55%', desc:'多雲轉晴',  emoji:'🌅', tip:'🎡 天氣怡人，早晨略霧，午後陽光。', class:'weather-warm' },
+      'LA':           { high:27, low:18, rain:'5%',  humidity:'65%', desc:'早霧午後晴', emoji:'⛅', tip:'🌊 June Gloom，早涼午晴，防曬仍重要。', class:'weather-mild' }
+    };
+    return fallback[cityKey] || fallback['LA'];
+  }
+}
+
+// ── DAYS DATA ───────────────────────────────────────────────────
+// transport chip helpers
+// cost: { icon, label, usd, ntd, parking, drive }
+// travelTo: { how, dur, usd, ntd, note }  ← leg BEFORE this item
+
+const days = [
+  // ───────────────────────────────────────────────────────────────
+  // 6/27 LAX → LAS → Fontainebleau
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '6/27', dow: '六', weatherKey: 'LV',
+    dailyCostNote: '✈️ 飛行日｜移動費：Uber LAS機場→飯店 ~$25 USD（含tip）≈ NT$800',
+    items: [
+      {
+        time: '07:20', type: '交通',
+        name: '🛬 降落 LAX（洛杉磯國際機場）',
+        note: '入境審查 + 提行李 + 接駁至 AA 國內線航廈，預留 90 分鐘',
+        mapQ: 'LAX Los Angeles International Airport Terminal B',
+        travel: null,
+        cost: null
+      },
+      {
+        time: '12:32', type: '交通',
+        name: '✈️ AA2039 LAX → LAS 起飛',
+        note: '飛行約 1 小時，帶隨身行李上機',
+        mapQ: 'LAX Tom Bradley International Terminal',
+        travel: { how: '✈️ 國內線', dur: '航廈接駁 + 候機 ~3.5hr', usd: '已含票價', ntd: '' },
+        cost: null
+      },
+      {
+        time: '14:00', type: '交通',
+        name: '🛬 抵達 LAS（哈利里德國際機場）',
+        note: '領托運行李，前往 Uber 乘車點（1號航廈外）',
+        mapQ: 'Harry Reid International Airport Las Vegas',
+        travel: { how: '✈️ AA2039', dur: '約 60 分鐘飛行', usd: '已含票價', ntd: '' },
+        cost: null
+      },
+      {
+        time: '14:30–15:00', type: '交通',
+        name: '🚕 Uber：LAS 機場 → Fontainebleau',
+        note: '距離約 4 km，尖峰可能 surge，保守估 20 分鐘',
+        mapQ: 'Fontainebleau Las Vegas',
+        travel: { how: '🚕 Uber', dur: '約 15–25 分鐘', usd: '$22–32', ntd: '≈ NT$700–1,000' },
+        cost: { icon: '🚕', label: 'Uber 機場→飯店', usd: '$22–32', ntd: '≈ NT$700–1,000' }
+      },
+      {
+        time: '15:00–18:00', type: '飯店',
+        name: '🏨 Fontainebleau Las Vegas Check In',
+        note: '放行李、換裝、休息。房間若未準備好可寄放行李逛大廳',
+        mapQ: 'Fontainebleau Las Vegas',
+        travel: null,
+        cost: null
+      },
+      {
+        time: '18:00–18:15', type: '交通',
+        name: '🚇 Monorail：Fontainebleau → BRERA',
+        note: 'Fontainebleau 站搭乘，約 3 站至 MGM/Bally\'s 區域',
+        mapQ: 'Las Vegas Monorail Fontainebleau Station',
+        travel: { how: '🚇 Monorail', dur: '約 8–12 分鐘', usd: '$8/人', ntd: '≈ NT$1,000 四人' },
+        cost: { icon: '🚇', label: 'Monorail 單程', usd: '$8/人', ntd: '≈ NT$1,000 四人' }
+      },
+      {
+        time: '18:00–19:30', type: '吃飯',
+        name: '🍽️ BRERA Osteria / Mercato Della Pescheria',
+        note: '義式料理，Strip 上步行即達',
+        mapQ: 'BRERA Osteria Las Vegas Fontainebleau',
+        travel: null,
+        cost: null
+      },
+    ]
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // 6/28 LV 市區觀光
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '6/28', dow: '日', weatherKey: 'LV',
+    dailyCostNote: '🚕🚇 移動費估算：Uber ~$45–70 ＋ Monorail日票 $17/人（$68 四人）≈ NT$3,600–4,400',
+    items: [
+      {
+        time: '09:30–10:00', type: '交通',
+        name: '🚇 Monorail：飯店 → Sadelle\'s',
+        note: 'Fontainebleau 站搭至 Bally\'s 站，步行至 Bellagio/Wynn 區域',
+        mapQ: 'Las Vegas Monorail Bally\'s Station',
+        travel: { how: '🚇 Monorail', dur: '約 10 分鐘 + 步行 5 分鐘', usd: '$8/人（或日票$17）', ntd: '' },
+        cost: { icon: '🚇', label: 'Monorail 建議買日票', usd: '$17/人', ntd: '≈ NT$2,160 四人' }
+      },
+      {
+        time: '10:00–11:00', type: '吃飯',
+        name: '🥞 Sadelle\'s',
+        note: '已訂位。紐約風格早午餐，貝果・煙燻鮭魚招牌',
+        mapQ: "Sadelle's Las Vegas Bellagio",
+        travel: null,
+        cost: null
+      },
+      {
+        time: '11:10–11:40', type: '交通',
+        name: '🚕 Uber：Strip → LV North Premium Outlets',
+        note: '距離約 7 km，非 Monorail 路線，需叫車',
+        mapQ: 'Las Vegas North Premium Outlets',
+        travel: { how: '🚕 Uber', dur: '約 15–25 分鐘', usd: '$18–28', ntd: '≈ NT$570–900' },
+        cost: { icon: '🚕', label: 'Uber 前往 Outlets', usd: '$18–28', ntd: '≈ NT$570–900' }
+      },
+      {
+        time: '11:30–16:00', type: '逛街',
+        name: '🛍️ Las Vegas North Premium Outlets',
+        note: '~190 個品牌，記得帶護照領折扣',
+        mapQ: 'Las Vegas North Premium Outlets',
+        travel: null,
+        cost: { icon: '🅿️', label: '停車', usd: '免費', ntd: '', parking: true }
+      },
+      {
+        time: '16:00–16:30', type: '交通',
+        name: '🚕 Uber：Outlets → Fontainebleau',
+        note: '回飯店休息換裝，準備晚間節目',
+        mapQ: 'Fontainebleau Las Vegas',
+        travel: { how: '🚕 Uber', dur: '約 15–25 分鐘', usd: '$18–28', ntd: '≈ NT$570–900' },
+        cost: { icon: '🚕', label: 'Uber 回飯店', usd: '$18–28', ntd: '≈ NT$570–900' }
+      },
+      {
+        time: '16:30–18:00', type: '飯店',
+        name: '🏨 Fontainebleau 休息換裝',
+        note: '',
+        mapQ: 'Fontainebleau Las Vegas',
+        travel: null, cost: null
+      },
+      {
+        time: '18:10–18:20', type: '交通',
+        name: '🚇 Monorail：飯店 → MGM Grand',
+        note: '搭至 MGM Grand 站，步行入場',
+        mapQ: 'MGM Grand Las Vegas',
+        travel: { how: '🚇 Monorail', dur: '約 10 分鐘', usd: '$8/人（日票已含）', ntd: '' },
+        cost: null
+      },
+      {
+        time: '18:30–20:30', type: '景點',
+        name: '🎭 Ka 秀（MGM Grand）',
+        note: '太陽劇團旗艦秀，已付款',
+        mapQ: 'KÀ by Cirque du Soleil MGM Grand Las Vegas',
+        travel: null, cost: null
+      },
+      {
+        time: '20:30–21:30', type: '景點',
+        name: '⛲ 百樂宮水舞秀',
+        note: '步行約 15 分鐘，免費觀賞，整點與半點演出',
+        mapQ: 'Bellagio Fountains Las Vegas',
+        travel: { how: '🚶 步行', dur: '約 15 分鐘', usd: '免費', ntd: '' },
+        cost: null
+      },
+      {
+        time: '21:30–', type: '吃飯',
+        name: '🍔 Gordon Ramsay Burger / Fish & Chips',
+        note: '百樂宮旁，步行可達',
+        mapQ: 'Gordon Ramsay Fish Chips Las Vegas',
+        travel: { how: '🚶 步行', dur: '約 3 分鐘', usd: '免費', ntd: '' },
+        cost: null
+      },
+      {
+        time: '22:30', type: '交通',
+        name: '🚇 Monorail 或 🚕 Uber 回飯店',
+        note: '深夜 Uber surge 可能發生，Monorail 末班約 03:00',
+        mapQ: 'Fontainebleau Las Vegas',
+        travel: { how: '🚇 Monorail 或 🚕 Uber', dur: '約 10–20 分鐘', usd: '$8 或 $20–30', ntd: '' },
+        cost: { icon: '🚇', label: '回程（日票或Uber）', usd: '$8–30', ntd: '' }
+      },
+    ]
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // 6/29 大峽谷一日遊
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '6/29', dow: '一', weatherKey: 'Grand Canyon',
+    dailyCostNote: '🚌 大峽谷含接駁｜約17:00返抵Vegas，晚間 Uber ~$30–40 ≈ NT$950–1,250',
+    items: [
+      {
+        time: '05:30–05:50', type: '交通',
+        name: '🚕 Uber：飯店 → Circus Circus 集合點',
+        note: '⚠️ 行程尚未訂購！請提前確認集合地點與時間',
+        mapQ: 'Circus Circus Las Vegas',
+        travel: { how: '🚕 Uber', dur: '約 12–18 分鐘', usd: '$15–22', ntd: '≈ NT$480–700' },
+        cost: { icon: '🚕', label: 'Uber 飯店→集合點', usd: '$15–22', ntd: '≈ NT$480–700' }
+      },
+      {
+        time: '06:00', type: '交通',
+        name: '🚌 旅遊巴士出發',
+        note: '接駁含於行程費用中。LV→南峽谷入口約 4–4.5 小時車程',
+        mapQ: 'Grand Canyon South Rim',
+        travel: { how: '🚌 旅遊巴士', dur: '約 4–4.5 小時', usd: '含於行程', ntd: '' },
+        cost: { icon: '🚌', label: '巴士接駁含於行程', usd: '已含', ntd: '' }
+      },
+      {
+        time: '10:00–16:00', type: '景點',
+        name: '🏜️ 大峽谷國家公園',
+        note: '步道健行、Mather Point、Desert View 觀景台。帶 2L+ 水！',
+        mapQ: 'Grand Canyon South Rim Visitor Center',
+        travel: null, cost: null
+      },
+      {
+        time: '13:00–17:00', type: '交通',
+        name: '🚌 返回拉斯維加斯',
+        note: '車程約 4–4.5 小時，預計 17:00–17:30 回到 LV 市區',
+        mapQ: 'Las Vegas Strip',
+        travel: { how: '🚌 旅遊巴士', dur: '約 4–4.5 小時', usd: '含於行程', ntd: '' },
+        cost: null
+      },
+      {
+        time: '17:30–18:30', type: '飯店',
+        name: '🏨 Fontainebleau 回房休息、換裝',
+        note: '大峽谷一整天走很累，趁早回飯店梳洗',
+        mapQ: 'Fontainebleau Las Vegas',
+        travel: { how: '🚕 Uber', dur: '約 15–20 分鐘', usd: '$15–22', ntd: '≈ NT$480–700' },
+        cost: { icon: '🚕', label: 'Uber 回飯店', usd: '$15–22', ntd: '≈ NT$480–700' }
+      },
+      {
+        time: '19:00–19:15', type: '交通',
+        name: '🚕 Uber → Herbs and Rye',
+        note: '餐廳位於 Strip 西邊，Uber 較方便，已訂位 19:15',
+        mapQ: 'Herbs and Rye Las Vegas',
+        travel: { how: '🚕 Uber', dur: '約 10–15 分鐘', usd: '$12–18', ntd: '≈ NT$380–570' },
+        cost: { icon: '🚕', label: 'Uber 前往餐廳', usd: '$12–18', ntd: '≈ NT$380–570' }
+      },
+      {
+        time: '19:15–20:30', type: '吃飯',
+        name: '🥩 Herbs and Rye',
+        note: '已訂位。以雞尾酒和牛排聞名，LV 本地人最愛',
+        mapQ: 'Herbs and Rye Las Vegas',
+        travel: null, cost: null
+      },
+      {
+        time: '20:30–21:00', type: '交通',
+        name: '🚕 Uber 回 Fontainebleau',
+        note: '',
+        mapQ: 'Fontainebleau Las Vegas',
+        travel: { how: '🚕 Uber', dur: '約 10–15 分鐘', usd: '$12–20', ntd: '≈ NT$380–640' },
+        cost: { icon: '🚕', label: 'Uber 回飯店', usd: '$12–20', ntd: '≈ NT$380–640' }
+      },
+    ]
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // 6/30 取車 → Desert Hills → Element Anaheim
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '6/30', dow: '二', weatherKey: 'LV',
+    dailyCostNote: '🚗 取車日｜Uber 去取車 ~$20 ＋ 油費 LV→Cabazon ~$18 ＋ Cabazon→Anaheim ~$8 ≈ NT$1,500',
+    items: [
+      {
+        time: '07:30–07:50', type: '交通',
+        name: '🚕 Uber：Fontainebleau → Alamo 取車',
+        note: '機場 Alamo 門市，記得帶護照和信用卡',
+        mapQ: 'Alamo Rent A Car Harry Reid International Airport',
+        travel: { how: '🚕 Uber', dur: '約 15–20 分鐘', usd: '$18–25', ntd: '≈ NT$570–800' },
+        cost: { icon: '🚕', label: 'Uber 飯店→取車點', usd: '$18–25', ntd: '≈ NT$570–800' }
+      },
+      {
+        time: '08:00–08:30', type: '交通',
+        name: '🚗 Alamo 取車辦理',
+        note: '確認車況、拍照存證，並在附近 Chick-fil-A 買早餐，去超市買水',
+        mapQ: 'Chick-fil-A Las Vegas Airport',
+        travel: null,
+        cost: { icon: '🚗', label: '租車費用（已含預算）', usd: '已付', ntd: 'NT$30,000 已含' }
+      },
+      {
+        time: '09:00–12:30', type: '交通',
+        name: '🚗 自駕：LV → Desert Hills Premium Outlets',
+        note: 'I-15 South，全程約 230 km，保守估 3.5–4 小時（含休息）',
+        mapQ: 'Desert Hills Premium Outlets Cabazon CA',
+        travel: { how: '🚗 自駕 I-15 S', dur: '約 3.5–4 小時', usd: '', ntd: '' },
+        cost: { icon: '⛽', label: '油費 LV→Cabazon', usd: '$16–22', ntd: '≈ NT$510–700', drive: true }
+      },
+      {
+        time: '12:30–18:00', type: '逛街',
+        name: '🛍️ Desert Hills Premium Outlets',
+        note: '~180 個品牌，Gucci・Saint Laurent・Prada 等精品 Outlet',
+        mapQ: 'Desert Hills Premium Outlets Cabazon California',
+        travel: null,
+        cost: { icon: '🅿️', label: '停車', usd: '免費', ntd: '', parking: true }
+      },
+      {
+        time: '18:00–18:50', type: '交通',
+        name: '🚗 自駕：Cabazon → Element Anaheim',
+        note: 'I-10 W → CA-57 N，約 80 km，保守估 50–70 分鐘（含晚高峰）',
+        mapQ: 'Element Anaheim Resort Area',
+        travel: { how: '🚗 自駕', dur: '約 50–70 分鐘', usd: '', ntd: '' },
+        cost: { icon: '⛽', label: '油費 Cabazon→Anaheim', usd: '$7–10', ntd: '≈ NT$220–320', drive: true }
+      },
+      {
+        time: '19:00–20:30', type: '飯店',
+        name: '🏨 Element Anaheim Check In',
+        note: '附近有 Vons / Ralph\'s 超市，可補充食物飲水',
+        mapQ: 'Element Anaheim Resort Area',
+        travel: null,
+        cost: { icon: '🅿️', label: '飯店停車（已含預算）', usd: '含於NT$2,500', ntd: '', parking: true }
+      },
+    ]
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // 7/1 Disneyland
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '7/1', dow: '三', weatherKey: 'Anaheim',
+    dailyCostNote: '🚶 步行前往迪士尼（門票已付✅），幾乎無交通費！停車含飯店費用',
+    items: [
+      {
+        time: '07:30–08:00', type: '交通',
+        name: '🚶 步行：Element → Disneyland 入口',
+        note: 'Element 距迪士尼正門約 10–15 分鐘步行，建議 08:00 前到排隊入場',
+        mapQ: 'Disneyland Main Entrance Anaheim',
+        travel: { how: '🚶 步行', dur: '約 10–15 分鐘', usd: '免費', ntd: '' },
+        cost: null
+      },
+      {
+        time: '08:00–21:00', type: '景點',
+        name: '🎡 Disneyland（門票已付款 ✅）',
+        note: '從飯店步行前往！開園前到場排隊搶 Lightning Lane',
+        mapQ: 'Disneyland Park Anaheim',
+        travel: null,
+        cost: { icon: '🎟️', label: '門票已付款', usd: '', ntd: 'NT$30,536 四人' }
+      },
+      {
+        time: '', type: '交通',
+        name: '🚟 園內單軌電車（Monorail）',
+        note: '連接 Disneyland 與 Downtown Disney，免費搭乘',
+        mapQ: 'Disneyland Monorail Station',
+        travel: null, cost: null
+      },
+      {
+        time: '21:00–21:20', type: '交通',
+        name: '🚶 步行返回 Element',
+        note: '欣賞完煙火後步行回飯店，約 15 分鐘',
+        mapQ: 'Element Anaheim Resort Area',
+        travel: { how: '🚶 步行', dur: '約 15 分鐘', usd: '免費', ntd: '' },
+        cost: null
+      },
+    ]
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // 7/2 Anaheim → LA 各景點
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '7/2', dow: '四', weatherKey: 'LA',
+    dailyCostNote: '🚗 自駕日｜油費 ~$12 ＋ 停車估 $25–40 全天 ＋ Glendale飯店停車已含 ≈ NT$1,200–1,650',
+    items: [
+      {
+        time: '08:00–09:00', type: '交通',
+        name: '🚗 自駕：Element Anaheim → Holiday Inn Glendale',
+        note: 'CA-57 N → I-210 W，約 65 km，保守估 60–75 分鐘（早高峰）',
+        mapQ: 'Holiday Inn Los Angeles International Airport',
+        travel: { how: '🚗 自駕', dur: '約 60–75 分鐘', usd: '', ntd: '' },
+        cost: { icon: '⛽', label: '油費 Anaheim→Glendale', usd: '$7–10', ntd: '≈ NT$220–320', drive: true }
+      },
+      {
+        time: '09:00–09:30', type: '飯店',
+        name: '🏨 Holiday Inn Glendale 寄放行李',
+        note: '辦理寄放，Check In 時間為下午',
+        mapQ: 'Holiday Inn Glendale Los Angeles',
+        travel: null,
+        cost: { icon: '🅿️', label: '飯店停車（已含預算）', usd: '含於NT$3,200', ntd: '', parking: true }
+      },
+      {
+        time: '09:30–10:30', type: '交通',
+        name: '🚗 自駕：Glendale → République Café',
+        note: 'I-5 S → US-101，約 25 km，保守估 40–55 分鐘（市區塞車）',
+        mapQ: 'République Los Angeles La Brea',
+        travel: { how: '🚗 自駕', dur: '約 40–55 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: 'La Brea 路邊停車', usd: '$3–5/hr', ntd: '', parking: true }
+      },
+      {
+        time: '11:00–12:00', type: '吃飯',
+        name: '☕ République Café Bakery',
+        note: '法式早午餐，麵包超優秀，建議週四人較少',
+        mapQ: 'République Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '12:00–12:15', type: '交通',
+        name: '🚗 自駕：La Brea → 好萊塢星光大道',
+        note: '約 4 km，車程 10–15 分鐘，停 Hollywood & Highland 停車場',
+        mapQ: 'Hollywood Walk of Fame',
+        travel: { how: '🚗 自駕', dur: '約 10–15 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: 'Hollywood & Highland 停車', usd: '$3–5/30min', ntd: '估 2hr ≈ $12–20', parking: true }
+      },
+      {
+        time: '12:00–13:30', type: '景點',
+        name: '⭐ 好萊塢星光大道',
+        note: '步行約 1.6 km，中國劇院手印、葛羅曼戲院',
+        mapQ: 'Hollywood Walk of Fame Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '13:30–14:00', type: '交通',
+        name: '🚗 自駕：Hollywood → Lake Hollywood Park',
+        note: '約 5 km，車程 15–20 分鐘，停路邊或 Mulholland 附近',
+        mapQ: 'Lake Hollywood Park Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 15–20 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: '路邊停車', usd: '$2–4/hr', ntd: '', parking: true }
+      },
+      {
+        time: '14:00–14:30', type: '景點',
+        name: '🎬 Lake Hollywood Park（Hollywood Sign 最佳拍攝點）',
+        note: '可拍到 Hollywood 字樣全景，人潮多建議快去快回',
+        mapQ: 'Lake Hollywood Park Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '14:30–15:00', type: '交通',
+        name: '🚗 自駕：Lake Hollywood → Costco / Target',
+        note: '約 12 km，車程 20–30 分鐘至 Burbank 或 Glendale Costco',
+        mapQ: 'Costco Burbank Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 20–30 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: '停車', usd: '免費', ntd: '', parking: true }
+      },
+      {
+        time: '15:00–17:00', type: '逛街',
+        name: '🛒 Costco / Target 採購',
+        note: '補充零食、飲料、防曬。買完直接回飯店 Check In',
+        mapQ: 'Costco Burbank California',
+        travel: null, cost: null
+      },
+      {
+        time: '17:00–17:30', type: '交通',
+        name: '🚗 自駕：Costco → Holiday Inn（Check In）',
+        note: '約 10 km，車程 15–20 分鐘',
+        mapQ: 'Holiday Inn Glendale Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 15–20 分鐘', usd: '', ntd: '' },
+        cost: null
+      },
+      {
+        time: '17:30–18:15', type: '飯店',
+        name: '🏨 Holiday Inn Check In，換裝出發',
+        note: '',
+        mapQ: 'Holiday Inn Glendale Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '18:15–18:45', type: '交通',
+        name: '🚗 自駕：Glendale → 格里菲斯天文台',
+        note: '約 10 km，車程 20–30 分鐘，天文台停車場有限！建議 18:30 前到',
+        mapQ: 'Griffith Observatory Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 20–30 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: '天文台停車場', usd: '$10', ntd: '≈ NT$320', parking: true }
+      },
+      {
+        time: '18:30–20:30', type: '景點',
+        name: '🔭 格里菲斯天文台',
+        note: '20:00 日落，可看 LA 夜景。免費入場，停車要收費',
+        mapQ: 'Griffith Observatory Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '20:30–21:00', type: '吃飯',
+        name: '🍔 Shake Shack / Chick-fil-A',
+        note: '下山後就近解決晚餐',
+        mapQ: 'Shake Shack Glendale Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 20–30 分鐘下山', usd: '', ntd: '' },
+        cost: null
+      },
+    ]
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // 7/3 環球影城
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '7/3', dow: '五', weatherKey: 'LA',
+    dailyCostNote: '🚗 自駕環球｜停車 NT$950 已含 ＋ 油費 ~$5 ≈ NT$1,100',
+    items: [
+      {
+        time: '08:00–08:30', type: '交通',
+        name: '🚗 自駕：Holiday Inn → 環球影城停車場',
+        note: 'I-5 S，約 18 km，保守估 25–40 分鐘（早高峰）。建議 08:30 前到停好車',
+        mapQ: 'Universal Studios Hollywood Parking',
+        travel: { how: '🚗 自駕', dur: '約 25–40 分鐘', usd: '', ntd: '' },
+        cost: { icon: '⛽', label: '油費 Glendale→環球', usd: '$4–6', ntd: '≈ NT$130–190', drive: true }
+      },
+      {
+        time: '08:30', type: '交通',
+        name: '🅿️ 環球停車場入場',
+        note: '停車場有多個等級，Preferred 最近，Standard 需搭接駁',
+        mapQ: 'Universal Studios Hollywood Parking Structure',
+        travel: null,
+        cost: { icon: '🅿️', label: '環球停車（已含預算）', usd: '$35+', ntd: 'NT$950 已含', parking: true }
+      },
+      {
+        time: '09:00–20:00', type: '景點',
+        name: '🎬 環球影城 ⚠️（門票尚未訂購）',
+        note: 'Harry Potter、Minions、Fast & Furious，建議提前買 Express Pass',
+        mapQ: 'Universal Studios Hollywood',
+        travel: null,
+        cost: { icon: '🎟️', label: '門票（尚未訂購！）', usd: '約$109–130/人', ntd: 'NT$16,700 四人' }
+      },
+      {
+        time: '20:00–20:30', type: '交通',
+        name: '🚗 自駕：環球 → Holiday Inn',
+        note: '約 18 km，晚間路況較好，約 25–35 分鐘',
+        mapQ: 'Holiday Inn Glendale Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 25–35 分鐘', usd: '', ntd: '' },
+        cost: null
+      },
+    ]
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // 7/4 農夫市集 → LACMA → Korean BBQ → 道奇
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '7/4', dow: '六', weatherKey: 'LA',
+    dailyCostNote: '🚗 7/4 獨立日塞車嚴重！停車估 $25–40，Dodger 附近停車含於票。建議早出門',
+    items: [
+      {
+        time: '09:00–09:45', type: '交通',
+        name: '🚗 自駕：Glendale → The Grove / 農夫市集',
+        note: 'I-5 → US-101 → CA-170，約 25 km，7/4 保守估 45–60 分鐘',
+        mapQ: 'The Grove Los Angeles Farmers Market',
+        travel: { how: '🚗 自駕', dur: '約 45–60 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: 'The Grove 停車', usd: '$3/hr（2hr=$6）', ntd: '≈ NT$190', parking: true }
+      },
+      {
+        time: '10:00–12:00', type: '景點',
+        name: '🥦 農夫市集 / The Grove',
+        note: '農夫市集在 The Grove 旁，週末熱鬧。可在市集買早餐',
+        mapQ: 'Original Farmers Market Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '12:00–12:15', type: '交通',
+        name: '🚗 自駕：The Grove → LACMA',
+        note: '距離 1 km，步行也可（約 12 分鐘），或開車停 LACMA',
+        mapQ: 'LACMA Los Angeles County Museum of Art',
+        travel: { how: '🚗 自駕 / 步行', dur: '步行 12 分或開車 5 分', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: 'LACMA 停車', usd: '$8–12', ntd: '≈ NT$250–380', parking: true }
+      },
+      {
+        time: '12:00–14:00', type: '逛街',
+        name: '🎨 Blue Bottle・郡立美術館（LACMA）・粉紅牆',
+        note: 'LACMA 戶外免費，都市之光裝置必拍。粉紅牆在 Paul Smith 旁',
+        mapQ: 'LACMA Urban Light Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '14:00–14:20', type: '交通',
+        name: '🚗 自駕：LACMA → Quarters Korean BBQ',
+        note: '約 6 km，保守估 15–20 分鐘',
+        mapQ: 'Quarters Korean BBQ Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 15–20 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: '附近路邊停車', usd: '$2–3/hr', ntd: '', parking: true }
+      },
+      {
+        time: '14:30–16:00', type: '吃飯',
+        name: '🥩 Quarters Korean BBQ',
+        note: '可提前訂位，7/4 人多建議早到',
+        mapQ: 'Quarters Korean BBQ Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '16:00–16:30', type: '交通',
+        name: '🚗 自駕：Korean BBQ → Dodger Stadium',
+        note: '約 10 km，7/4 人潮多！保守估 30–45 分鐘。建議 16:00 出發',
+        mapQ: 'Dodger Stadium Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 30–45 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: '道奇停車（含於票）', usd: '已含', ntd: '', parking: true }
+      },
+      {
+        time: '17:00–22:00', type: '景點',
+        name: '⚾ 道奇體育館 MLB 球賽 + 7/4 煙火！',
+        note: '獨立日有煙火秀！比賽後人潮散場慢，預留 30–45 分鐘離場',
+        mapQ: 'Dodger Stadium Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '22:00–22:45', type: '交通',
+        name: '🚗 自駕：道奇 → Holiday Inn Glendale',
+        note: '散場後嚴重塞車！約 12 km 但保守估 40–60 分鐘',
+        mapQ: 'Holiday Inn Glendale Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 40–60 分鐘（散場塞車）', usd: '', ntd: '' },
+        cost: null
+      },
+    ]
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // 7/5 比佛利山莊 → Getty → Santa Monica → 韓國城
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '7/5', dow: '日', weatherKey: 'LA',
+    dailyCostNote: '🚗 最後觀光日｜停車估 $35–50 全天（Getty $20 最貴），油費 ~$12 ≈ NT$1,500–2,000',
+    items: [
+      {
+        time: '09:30–10:15', type: '交通',
+        name: '🚗 自駕：Glendale → 比佛利山莊 Rodeo Drive',
+        note: 'I-5 → US-101 → I-405，約 35 km，保守估 45–60 分鐘（週日略好）',
+        mapQ: 'Rodeo Drive Beverly Hills California',
+        travel: { how: '🚗 自駕', dur: '約 45–60 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: 'Rodeo Dr. 路邊計費停車', usd: '$2–4/hr（2hr=$8）', ntd: '≈ NT$250', parking: true }
+      },
+      {
+        time: '10:30–11:30', type: '景點',
+        name: '💎 比佛利山莊 Rodeo Drive',
+        note: '精品一條街，拍照為主。附近有免費觀光路線可走',
+        mapQ: 'Rodeo Drive Beverly Hills',
+        travel: null, cost: null
+      },
+      {
+        time: '11:30–12:00', type: '交通',
+        name: '🚗 自駕：比佛利 → Bruxie',
+        note: '約 5–8 km，保守估 15–25 分鐘',
+        mapQ: 'Bruxie Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 15–25 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: '附近路邊停車', usd: '$2–3/hr', ntd: '', parking: true }
+      },
+      {
+        time: '12:00–13:30', type: '吃飯',
+        name: '🧇 Bruxie / Saffron & Rose Ice Cream',
+        note: '比利時鬆餅漢堡。飯後去 Saffron & Rose 玫瑰冰淇淋',
+        mapQ: 'Bruxie Westwood Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '13:30–14:00', type: '交通',
+        name: '🚗 自駕：市區 → Getty Center',
+        note: 'I-405 N，約 12 km，保守估 20–30 分鐘，Getty 停車場要預訂！',
+        mapQ: 'Getty Center Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 20–30 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: 'Getty Center 停車', usd: '$20', ntd: '≈ NT$640', parking: true }
+      },
+      {
+        time: '14:00–15:30', type: '景點',
+        name: '🏛️ Getty Center',
+        note: '世界頂級美術館，免費入場只收停車費。俯瞰 LA 夜景一流',
+        mapQ: 'Getty Center Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '15:30–16:15', type: '交通',
+        name: '🚗 自駕：Getty → Santa Monica 海灘',
+        note: 'CA-1 South，約 12 km，保守估 25–40 分鐘（週日下午）',
+        mapQ: 'Santa Monica Pier California',
+        travel: { how: '🚗 自駕 CA-1', dur: '約 25–40 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: 'Santa Monica 停車場', usd: '$3–5/hr（2hr≈$10）', ntd: '≈ NT$320', parking: true }
+      },
+      {
+        time: '16:30–18:00', type: '景點',
+        name: '🌊 Santa Monica 海灘 & Pier',
+        note: '太平洋海灘、Route 66 終點牌，日落前來最美',
+        mapQ: 'Santa Monica Pier California',
+        travel: null, cost: null
+      },
+      {
+        time: '18:00–18:40', type: '交通',
+        name: '🚗 自駕：Santa Monica → The Boiling Crab（韓國城）',
+        note: 'I-10 E → US-101 N，約 20 km，保守估 35–50 分鐘（晚高峰）',
+        mapQ: 'The Boiling Crab Koreatown Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 35–50 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: '韓國城停車場', usd: '$5–8/hr', ntd: '', parking: true }
+      },
+      {
+        time: '18:30–20:00', type: '吃飯',
+        name: '🦞 The Boiling Crab（韓國城）',
+        note: '可能候位 30–60 分鐘。龍蝦、螃蟹、蝦料理超好吃',
+        mapQ: 'The Boiling Crab Koreatown Los Angeles',
+        travel: null, cost: null
+      },
+      {
+        time: '20:00–20:20', type: '逛街',
+        name: '🛒 Target',
+        note: '買最後紀念品 / 補貨，步行或開車近',
+        mapQ: 'Target Koreatown Los Angeles',
+        travel: { how: '🚗 或步行', dur: '約 5 分鐘', usd: '', ntd: '' },
+        cost: { icon: '🅿️', label: '停車或路邊', usd: '免費–$3', ntd: '', parking: true }
+      },
+      {
+        time: '20:30–21:00', type: '交通',
+        name: '🚗 自駕：韓國城 → Holiday Inn Glendale',
+        note: '約 20 km，保守估 30–40 分鐘',
+        mapQ: 'Holiday Inn Glendale Los Angeles',
+        travel: { how: '🚗 自駕', dur: '約 30–40 分鐘', usd: '', ntd: '' },
+        cost: null
+      },
+    ]
+  },
+
+  // ───────────────────────────────────────────────────────────────
+  // 7/6 回程
+  // ───────────────────────────────────────────────────────────────
+  {
+    date: '7/6', dow: '一', weatherKey: 'LA',
+    dailyCostNote: '✈️ 回程日！Glendale→LAX 約 30–50 分鐘，8:30 前還車，時間要充裕！',
+    items: [
+      {
+        time: '06:00–06:30', type: '交通',
+        name: '🚗 自駕：Holiday Inn → LAX Alamo 還車',
+        note: 'I-5 S → I-105 W，約 40 km，保守估 45–60 分鐘（早高峰）。06:00 出發！',
+        mapQ: 'Alamo Rent A Car LAX',
+        travel: { how: '🚗 自駕', dur: '約 45–60 分鐘', usd: '', ntd: '' },
+        cost: { icon: '⛽', label: '最後段油費', usd: '$6–10', ntd: '≈ NT$190–320', drive: true }
+      },
+      {
+        time: '07:00–08:00', type: '交通',
+        name: '🚗 Alamo 還車 + 接駁至航廈',
+        note: '還車 → 搭免費接駁車至 T-B（長榮 BR5），預留 45 分鐘',
+        mapQ: 'LAX Tom Bradley International Terminal',
+        travel: { how: '🚌 免費接駁', dur: '約 10–20 分鐘', usd: '免費', ntd: '' },
+        cost: null
+      },
+      {
+        time: '08:00–', type: '交通',
+        name: '✈️ 辦理報到 & 安檢',
+        note: 'BR5 長榮航空，國際線建議提前 3 小時報到',
+        mapQ: 'LAX Tom Bradley International Terminal',
+        travel: null, cost: null
+      },
+      {
+        time: '回台灣', type: '交通',
+        name: '🏠 BR5 LAX → TPE，平安返抵台灣！',
+        note: '飛行約 13–14 小時',
+        mapQ: 'Taiwan Taoyuan International Airport',
+        travel: { how: '✈️ BR5 長榮', dur: '約 13–14 小時', usd: '已含票價', ntd: '' },
+        cost: null
+      },
+    ]
+  },
+];
+
+// ── EXPENSES DATA ───────────────────────────────────────────────
+// 格式對應試算表：A分類 B項目 C總價 D每人 E狀態
+let expenses = [
+  { cat: '交通', name: 'TPE-LAX 來回機票', total: 149596, per: 37399, status: 'paid' },
+  { cat: '交通', name: 'LAX-LAS 機票', total: 12865, per: 3216, status: 'paid' },
+  { cat: '門票', name: '6/27-6/30 Fontainebleau', total: 35000, per: 8750, status: 'reserved' },
+  { cat: '門票', name: 'ka秀', total: 13872, per: 3468, status: 'paid' },
+  { cat: '門票', name: '大峽谷行程', total: 18000, per: 4500, status: 'unpurchased' },
+  { cat: '交通', name: '6/30 LAS to LAX 租車', total: 30000, per: 7500, status: 'onsite' },
+  { cat: '飯店', name: '6/30-7/2 element', total: 20000, per: 5000, status: 'reserved' },
+  { cat: '其他', name: 'element 停車費', total: 2500, per: 625, status: 'onsite' },
+  { cat: '門票', name: '7/1迪士尼門票', total: 30536, per: 7634, status: 'paid' },
+  { cat: '飯店', name: '7/2-7/6 holiday inn', total: 43000, per: 10750, status: 'reserved' },
+  { cat: '其他', name: 'holiday inn 停車費', total: 3200, per: 800, status: 'onsite' },
+  { cat: '門票', name: '7/3環球門票', total: 16700, per: 4175, status: 'unpurchased' },
+  { cat: '其他', name: '7/3環球停車', total: 950, per: 238, status: 'onsite' },
+  { cat: '門票', name: '7/4MLB票＋停車位', total: 12835, per: 3209, status: 'paid' },
+];
+
+const catColors = { '交通': '#3b82f6', '飯店': '#8b5cf6', '門票': '#f59e0b', '其他': '#6b7280' };
+const statusMap = {
+  paid:        { label: '已付款',    cls: 'status-paid' },
+  reserved:    { label: '已預定未付', cls: 'status-reserved' },
+  onsite:      { label: '現場付款',  cls: 'status-onsite' },
+  unpurchased: { label: '未訂購',    cls: 'status-unpurchased' },
+};
+
+// 試算表狀態文字 → 英文 key
+const STATUS_ZH = {
+  '已付款': 'paid', '已預定未付款': 'reserved', '已預定未付': 'reserved',
+  '現場付款': 'onsite', '未訂購': 'unpurchased', 'optional': null,
+};
+
+let sheetsConnected = false;
+
+// ── Apps Script 端點（JSONP 繞過 CORS）──────────────────────────
+const API_URL = 'https://script.google.com/macros/s/AKfycbzD-Sr4cPPSyrIIBfA1smQjugs4KZKH-myWHltZdeBYnW9Mg6zO9PTiRD9qmrTO-ndJ/exec';
+
+function getStatusClass(status) {
+  if (status === '已付款') return 'paid';
+  if (status === '未訂購') return 'unpurchased';
+  if (status === '現場付款') return 'onsite';
+  if (status === '已預定未付款' || status === '已預定未付') return 'reserved';
+  return null;
+}
+
+function loadFromSheets(isRefresh) {
+  setSheetStatus('loading', isRefresh ? '重新整理中…' : '讀取試算表…', '');
+  document.getElementById('expenseTable').innerHTML =
+    '<div style="text-align:center;padding:28px;color:#7a9bc0;font-size:13px">⏳ 資料載入中，請稍候…</div>';
+
+  // 用 JSONP 避開 CORS
+  const callbackName = 'sheetsCallback_' + Date.now();
+  const script = document.createElement('script');
+  script.src = API_URL + '?callback=' + callbackName;
+
+  window[callbackName] = function(data) {
+    // 清理
+    delete window[callbackName];
+    document.body.removeChild(script);
+
+    const parsed = [];
+    data.forEach(function(item) {
+      var category = item['分類'] || '未分類';
+      var name     = item['項目'] || '無項目名稱';
+      var total    = Number(item['總價']) || 0;
+      var per      = Number(item['平均']) || Math.round(total / 4);
+      var status   = getStatusClass((item['進度'] || '').toString().trim());
+      if (!status) return;
+      parsed.push({ cat: category, name: name, total: total, per: per, status: status });
+    });
+
+    expenses = parsed;
+    sheetsConnected = true;
+
+    var now = new Date().toLocaleTimeString('zh-TW', {hour:'2-digit', minute:'2-digit'});
+    setSheetStatus('ok', '已同步（' + parsed.length + ' 筆）', '更新時間 ' + now);
+    document.getElementById('dataSourceBadge').textContent = '📊 試算表即時';
+
+    updateSummary();
+    renderExpenses(currentFilter());
+  };
+
+  script.onerror = function() {
+    delete window[callbackName];
+    document.body.removeChild(script);
+    setSheetStatus('error', '讀取失敗，顯示內建資料', '');
+    updateSummary();
+    renderExpenses(currentFilter());
+  };
+
+  document.body.appendChild(script);
+}
+
+function currentFilter() {
+  const btn = document.querySelector('.filter-btn.active');
+  if (!btn) return 'all';
+  const m = btn.getAttribute('onclick').match(/'(\w+)'/);
+  return m ? m[1] : 'all';
+}
+
+function setSheetStatus(type, text, sub) {
+  const colors = { ok: '#22c55e', loading: '#f59e0b', error: '#dc2626' };
+  const dot = document.getElementById('sheetsStatusDot');
+  if (dot) dot.style.background = colors[type] || '#aaa';
+  const el = document.getElementById('sheetsStatusText');
+  if (el) el.textContent = text;
+  const s = document.getElementById('sheetsStatusSub');
+  if (s) s.textContent = sub;
+}
+
+function resetSheets() {
+  sheetsConnected = false;
+  expenses = defaultExpenses();
+  document.getElementById('dataSourceBadge').textContent = '內建資料';
+  setSheetStatus('error', '已切換回內建資料', '');
+  updateSummary();
+  renderExpenses('all');
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn').classList.add('active');
+}
+
+function showSheetsSetup() {}
+function connectSheets() {}
+function useLocalData() {}
+
+function defaultExpenses() {
+  return [
+    { cat: '交通', name: 'TPE-LAX 來回機票', total: 149596, per: 37399, status: 'paid' },
+    { cat: '交通', name: 'LAX-LAS 機票', total: 12865, per: 3216, status: 'paid' },
+    { cat: '門票', name: '6/27-6/30 Fontainebleau', total: 35000, per: 8750, status: 'reserved' },
+    { cat: '門票', name: 'ka秀', total: 13872, per: 3468, status: 'paid' },
+    { cat: '門票', name: '大峽谷行程', total: 18000, per: 4500, status: 'unpurchased' },
+    { cat: '交通', name: '6/30 LAS to LAX 租車', total: 30000, per: 7500, status: 'onsite' },
+    { cat: '飯店', name: '6/30-7/2 element', total: 20000, per: 5000, status: 'reserved' },
+    { cat: '其他', name: 'element 停車費', total: 2500, per: 625, status: 'onsite' },
+    { cat: '門票', name: '7/1迪士尼門票', total: 30536, per: 7634, status: 'paid' },
+    { cat: '飯店', name: '7/2-7/6 holiday inn', total: 43000, per: 10750, status: 'reserved' },
+    { cat: '其他', name: 'holiday inn 停車費', total: 3200, per: 800, status: 'onsite' },
+    { cat: '門票', name: '7/3環球門票', total: 16700, per: 4175, status: 'unpurchased' },
+    { cat: '其他', name: '7/3環球停車', total: 950, per: 238, status: 'onsite' },
+    { cat: '門票', name: '7/4MLB票＋停車位', total: 12835, per: 3209, status: 'paid' },
+  ];
+}
+
+// ── 動態統計更新 ──────────────────────────────────────────────────
+function updateSummary() {
+  const total = expenses.reduce((s, e) => s + e.total, 0);
+  const per   = expenses.reduce((s, e) => s + e.per, 0);
+  const pending = expenses.filter(e => e.status !== 'paid')
+                          .reduce((s, e) => s + e.total, 0);
+
+  document.getElementById('summaryTotal').textContent = 'NT$' + total.toLocaleString();
+  document.getElementById('summaryPer').textContent   = '每人平均 NT$' + Math.round(per).toLocaleString();
+  document.getElementById('summaryPending').textContent = 'NT$' + pending.toLocaleString();
+
+  const groups = { paid:[], reserved:[], onsite:[], unpurchased:[] };
+  expenses.forEach(e => { if (groups[e.status]) groups[e.status].push(e); });
+
+  const fmt = (arr) => 'NT$' + arr.reduce((s,e)=>s+e.total,0).toLocaleString();
+  const cnt = (arr) => arr.length + ' 項';
+
+  document.getElementById('statPaid').textContent         = fmt(groups.paid);
+  document.getElementById('statPaidN').textContent        = cnt(groups.paid);
+  document.getElementById('statUnpurchased').textContent  = fmt(groups.unpurchased);
+  document.getElementById('statUnpurchasedN').textContent = cnt(groups.unpurchased);
+  document.getElementById('statReserved').textContent     = fmt(groups.reserved);
+  document.getElementById('statReservedN').textContent    = cnt(groups.reserved);
+  document.getElementById('statOnsite').textContent       = fmt(groups.onsite);
+  document.getElementById('statOnsiteN').textContent      = cnt(groups.onsite);
+}
+
+// ── WEATHER SKELETON ────────────────────────────────────────────
+function weatherSkeleton(cityKey) {
+  return `
+    <div class="weather-banner weather-mild fade-in" style="min-height:90px;align-items:center;justify-content:center;">
+      <div style="text-align:center;width:100%">
+        <div style="font-size:22px;margin-bottom:6px">🌐</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.85);font-weight:600">正在取得 ${cityKey} 即時天氣…</div>
+        <div style="margin-top:8px;display:flex;justify-content:center;gap:5px">
+          ${[0,1,2].map(i=>`<div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);animation:pulse 1.2s ease-in-out ${i*0.2}s infinite"></div>`).join('')}
+        </div>
+      </div>
+    </div>
+    <style>@keyframes pulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}</style>`;
+}
+
+// ── BUILD TIMELINE HTML ──────────────────────────────────────────
+function buildTimeline(d) {
+  return d.items.map(item => {
+    const mapBtnHTML = item.mapQ
+      ? `<a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.mapQ)}" target="_blank" rel="noopener">📍 地圖</a>`
+      : '';
+    let costHTML = '';
+    if (item.cost) {
+      const chipClass = item.cost.parking ? 'cost-chip parking' : (item.cost.drive || item.cost.icon==='⛽') ? 'cost-chip drive' : 'cost-chip';
+      costHTML = `<span class="${chipClass}">${item.cost.icon} ${item.cost.label}${item.cost.usd ? ' · '+item.cost.usd : ''}${item.cost.ntd ? ' '+item.cost.ntd : ''}</span>`;
+    }
+    // Show travel leg info above non-transport items
+    let travelHTML = '';
+    if (item.travel && item.type !== '交通') {
+      const excluded = ['免費','已含票價','含於行程','已含',''];
+      const showCost = item.travel.usd && !excluded.includes(item.travel.usd);
+      travelHTML = `<div class="travel-leg">🗺️ ${item.travel.how} · ${item.travel.dur}${showCost ? ' · ' + item.travel.usd : (item.travel.usd === '免費' ? ' · 免費' : '')}</div>`;
+    }
+    return `
+      <div class="tl-item">
+        <div class="tl-card">
+          ${travelHTML}
+          <div class="tl-card-top">
+            <div class="tl-card-main">
+              ${item.time ? `<div class="tl-time">⏰ ${item.time}</div>` : ''}
+              <div class="tl-name">${item.name}</div>
+              ${item.note ? `<div class="tl-note">💬 ${item.note}</div>` : ''}
+            </div>
+            ${mapBtnHTML}
+          </div>
+          <div class="tl-bottom">
+            <span class="tl-tag tag-${item.type}">${item.type}</span>
+            ${costHTML}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── RENDER DAY (async, live weather) ────────────────────────────
+async function renderDay(idx) {
+  const d = days[idx];
+  const costBarHTML = `
+    <div class="daily-cost-bar fade-in">
+      <span style="font-size:16px">💸</span>
+      <div class="daily-cost-label">${d.dailyCostNote}</div>
+    </div>`;
+  const tlHTML = buildTimeline(d);
+  const timelineCard = `
+    <div class="card fade-in">
+      <div class="card-body" style="padding:14px 16px 14px">
+        <div class="timeline">${tlHTML}</div>
+      </div>
+    </div>`;
+
+  // Show skeleton immediately, timeline below
+  document.getElementById('dayContent').innerHTML =
+    weatherSkeleton(d.weatherKey) + costBarHTML + timelineCard;
+
+  // Fetch live weather then swap banner
+  const w = await fetchWeather(d.weatherKey);
+  const now = new Date().toLocaleTimeString('zh-TW', {hour:'2-digit', minute:'2-digit'});
+  const weatherHTML = `
+    <div class="weather-banner ${w.class} fade-in">
+      <div class="weather-banner-emoji">${w.emoji}</div>
+      <div class="weather-banner-info">
+        <div class="weather-banner-location">📍 ${cityEnNames[d.weatherKey]} · 更新 ${now}</div>
+        <div class="weather-banner-temp">${w.high}°C <span style="font-size:16px;opacity:0.7">/ ${w.low}°C</span></div>
+        <div class="weather-banner-desc">${w.desc}</div>
+        <div style="display:flex;gap:14px;margin-top:5px">
+          <div><div style="font-size:11px;color:rgba(255,255,255,0.7)">降雨率</div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#fff">${w.rain}</div></div>
+          <div><div style="font-size:11px;color:rgba(255,255,255,0.7)">濕度</div><div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#fff">${w.humidity}</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="weather-tip fade-in" style="background:#fff;border-radius:10px;padding:9px 12px;margin-bottom:12px;font-size:12px;color:#3a5a80;box-shadow:0 2px 8px rgba(15,39,68,0.07);">
+      ${w.tip}
+    </div>`;
+
+  document.getElementById('dayContent').innerHTML =
+    weatherHTML + costBarHTML + timelineCard;
+}
+
+function selectDay(idx, el) {
+  document.querySelectorAll('.day-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderDay(idx);
+}
+
+// ── RENDER EXPENSES ─────────────────────────────────────────────
+function renderExpenses(filter = 'all') {
+  const filtered = filter === 'all' ? expenses : expenses.filter(e => e.status === filter);
+  document.getElementById('expenseTable').innerHTML = filtered.length
+    ? filtered.map(e => `
+      <div class="expense-row">
+        <div class="exp-dot" style="background:${catColors[e.cat]||'#6b7280'}"></div>
+        <div style="flex:1">
+          <div class="exp-name">${e.name}</div>
+          <div class="exp-sub">${e.cat}</div>
+        </div>
+        <div style="text-align:right;margin-right:6px">
+          <div class="exp-amount">NT$${e.total.toLocaleString()}</div>
+          <div class="exp-per">每人 ${e.per.toLocaleString()}</div>
+        </div>
+        <span class="status-badge ${statusMap[e.status].cls}">${statusMap[e.status].label}</span>
+      </div>`).join('')
+    : '<div style="text-align:center;padding:24px;color:var(--text-light);font-size:13px">此分類無資料</div>';
+}
+
+function filterExpense(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderExpenses(filter);
+}
+
+// ── TAB SWITCH ──────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// ── INIT ────────────────────────────────────────────────────────
+renderDay(0);
+updateSummary();
+renderExpenses();
+
+// 自動從 Apps Script 讀取最新試算表資料
+loadFromSheets(false);
+</script>
+</body>
+</html>
